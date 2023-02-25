@@ -1,0 +1,10 @@
+name: toxic
+description: Toxic density
+version: 1.0.0
+homepage: https://github.com/ArcaneArts/toxic
+environment:
+  sdk: '>=2.19.2 <3.0.0'
+dependencies: 
+  intl: ^0.18.0
+dev_dependencies:
+  test: ^1.23.1
