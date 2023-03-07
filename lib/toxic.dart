@@ -104,23 +104,45 @@ extension TMap<K, V> on Map<K, V> {
             this.keys.firstWhere((element) => this[element] == v[index]));
   }
 
-  Map<K, V> compute(K key, V Function(K key, V? value) compute) {
+  V compute(K key, V Function(K key, V? value) compute) {
     this[key] = compute(key, this[key]);
-    return this;
+    return this[key]!;
   }
 
-  Map<K, V> computeIfPresent(K key, V Function(K key, V value) ifPresent) {
+  V computeIfPresent(K key, V Function(K key, V value) ifPresent) {
     if (containsKey(key)) {
       this[key] = ifPresent(key, this[key]!);
     }
-    return this;
+    return this[key]!;
   }
 
-  Map<K, V> computeIfAbsent(K key, V Function(K key) ifAbsent) {
+  V computeIfAbsent(K key, V Function(K key) ifAbsent) {
     if (!containsKey(key)) {
       this[key] = ifAbsent(key);
     }
-    return this;
+    return this[key]!;
+  }
+
+  Future<V> computeIfAbsentAsync(
+      K key, Future<V> Function(K key) ifAbsent) async {
+    if (!containsKey(key)) {
+      this[key] = await ifAbsent(key);
+    }
+    return this[key]!;
+  }
+
+  Future<V> computeAsync(
+      K key, Future<V> Function(K key, V? value) compute) async {
+    this[key] = await compute(key, this[key]);
+    return this[key]!;
+  }
+
+  Future<V> computeIfPresentAsync(
+      K key, Future<V> Function(K key, V value) ifPresent) async {
+    if (containsKey(key)) {
+      this[key] = await ifPresent(key, this[key]!);
+    }
+    return this[key]!;
   }
 
   Map<V, K> flipFlat() {
