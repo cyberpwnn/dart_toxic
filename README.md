@@ -1,194 +1,190 @@
-# 🚀 TOXIC: Supercharge Your Dart Types 🚀
+# TOXIC - The Horrible, Extension Library for Dart
+___
+## Project Overview
+TOXIC is a Dart/Flutter project designed to augment the Dart language's core data types such as `Int`, `Double`, and `String` with a comprehensive suite of extensions. These extensions streamline common tasks, introduce new functionalities, and enhance the overall development experience.
+___
+## Feature Extensions
+### TInt
 
-## 🌟 Project Synopsis
+`TInt` enriches the integer type with a variety of utility methods:
 
-**TOXIC** is a cutting-edge Dart/Flutter initiative that supercharges 🛠️ Dart's foundational data types like `Int`, `Double`, and `String`. It introduces a rich collection of extensions designed to elevate your coding workflow, inject advanced features, and refine the developer's journey.
+- `to`: Linear interpolation between integers.
+- `plural`: Determines the correct singular or plural form based on the integer's value.
+- `format`: Applies locale-specific formatting to the integer.
+- `formatCompact`: Provides a shorter format representation of the integer.
 
-## ✨ Enhanced Feature Set
+### TString
 
-### 🧬 TInt Extensions
+`TString` expands string functionality with transformation utilities:
 
-`TInt` breathes new life into integers, adding:
+- `roadkill`, `upperRoadkill`, `dashkill`, `upperDashkill`: Replaces spaces with underscores or dashes, optionally adjusting case.
+- `camelCase`: Transforms the string into camel case.
+- `randomCase`: Randomizes the character casing within the string.
+- `reversed`: Reverses the character order of the string.
+- Split functions: `splitSlashes`, `splitDots`, `splitAfter`, `splitLast`.
+- Capitalization functions: `capitalize`, `capitalizeWords`.
 
-- `to`: 🔗 Seamlessly interpolate between integers.
-- `plural`: 📏 Auto-select singular or plural forms based on value.
-- `format`: 🌍 Locale-aware formatting.
-- `formatCompact`: 📉 Streamlined integer representation.
+### TDouble
 
-### 📝 TString Extensions
+`TDouble` enhances the double type with formatting and interpolation:
 
-`TString` evolves strings by adding transformative powers:
+- `percent`: Converts a double to a percentage representation.
+- `format`: Formats the double according to locale-specific rules.
+- `formatCompact`: Condenses the double into a more compact format.
+- `to`: Performs linear interpolation between doubles.
 
-- `roadkill`, `upperRoadkill`, `dashkill`, `upperDashkill`: 🔄 Swap spaces with underscores/dashes, with case options.
-- `camelCase`: 🐫 Convert strings to camel case.
-- `randomCase`: 🎲 Jumble up the case for a fun twist.
-- `reversed`: ↩️ Flip the script, literally.
-- `Split functions`: 🔪 Easily divide strings by various delimiters.
-- `Capitalization functions`: 🔠 Capitalize single words or entire sentences.
+### TFuture
 
-### 🔢 TDouble Extensions
+`TFuture` adds post-execution capabilities to `Future<T>`:
 
-`TDouble` refines doubles with:
+- `thenRun`: Executes a specified function after the future's completion.
 
-- `percent`: 💯 Transform to percentage with precision.
-- `format`: 🎨 Apply locale-specific formatting.
-- `formatCompact`: 🗜️ Compress the double for brevity.
-- `to`: 🔗 Interpolate between doubles with ease.
+### TMap
 
-### ⏳ TFuture Extensions
+`TMap` introduces additional methods for dynamic map handling:
 
-`TFuture` adds afterburners to `Future<T>`:
+- Overloaded operators: Merging (`+`) and key removal (`-`).
+- Sorting functions: `sortedValuesByKey`, `sortedKeysByValue`.
+- Compute functions: `compute`, `computeIfPresent`, `computeIfAbsent`, and their asynchronous variants.
+- Flipping functions: `flipFlat`, `flip`.
+- Merge function: Combines two maps into one.
 
-- `thenRun`: 🏃‍♂️ Execute functions post-completion.
+### TIterableInt
 
-### 🗺️ TMap Extensions
+`TIterableInt` provides arithmetic and statistical extensions for integer iterables:
 
-`TMap` opens up new pathways for maps:
+- Arithmetic operators: Multiplication (`*`), division (`~/`), addition (`+`), subtraction (`-`), modulo (`%`), bitwise (`^`, `|`, `&`, `<`, `>`, `~`, `-`).
+- Statistical methods: Sum, product, minimum, maximum, average (as int and double), median, mode.
 
-- Overloaded operators: 🔑 Merge keys (`+`).
-- Overloaded operators: 🔑 Remove keys (`-`).
-- Sorting functions: 🔢 Sort by keys or values.
-- Compute functions: 💻 Calculate values, sync or async.
-- Flipping functions: 🔄 Reverse key-value pairs.
-- Merge function: 🤝 Unite two maps into one.
+### TIterableDouble
 
-### 📊 TIterableInt Extensions
-
-`TIterableInt` delivers arithmetic and stats for integer series:
-
-- Arithmetic operators: ➕➖✖️➗ and more for batch operations.
-- Statistical methods: 📈 Compute sum, product, min, max, average, median, mode.
-
-### 🔟 TIterableDouble Extensions
-
-`TIterableDouble` mirrors `TIterableInt`, but for doubles:
+`TIterableDouble` extends double iterables with arithmetic and statistical operations:
 
 - Arithmetic operators: Same as `TIterableInt`.
-- Statistical methods: As robust as `TIterableInt`.
+- Statistical methods: Same as `TIterableInt`.
 
-### 📃 TList Extensions
+### TList
 
-`TList` enhances lists with elemental tactics:
+`TList` enhances the list type with element manipulation operators:
 
-- Overloaded operators: ➕ Add and ➖ Subtract elements.
+- Overloaded operators: Element addition (`+`) and removal (`-`).
 
-### ✅ TSet Extensions
+### TSet
 
-`TSet` streamlines set manipulation:
+`TSet` provides set manipulation through additional operators:
 
-- Overloaded operators: ➕ Add and ➖ Remove elements.
+- Overloaded operators: Element addition (`+`) and removal (`-`).
 
-### 🔄 TIterable Extensions
+### TIterable
 
-`TIterable` is a swiss-army knife for iterables:
+`TIterable` adds utility and transformation methods to iterables:
 
-- Addition methods: 🔝 Add elements at any end.
-- Statistical and utility functions: 🧮 Count, dedupe, shuffle.
-- Accessors: 🔍 Find indices or middle values.
-- Sorting and mapping functions: 🔄 Sort and map effortlessly.
+- Addition methods: Add single or multiple elements at either start or end of the iterable.
+- Statistical and utility functions: Count occurrences, deduplicate, shuffle.
+- Accessors: Retrieve last index, middle index, middle value.
+- Sorting and mapping functions: Sort, convert to keys/values, map to list with or without soft mapping.
+___
+## Usage Examples
+Here are some specific examples demonstrating how to use TOXIC's extensions in your Dart code:
 
-## 🚀 Usage Pro-Tips
-
-Dive into TOXIC's extensions with these precise Dart code snippets:
-
-### 🧮 TInt Example:
+### TInt Example:
 
 ```dart
 int count = 2;
-print(count.to(10, 0.5)); // 👉 6.0
-print(count.plural("apple", "apples")); // 👉 "apples"
-print(count.format()); // 👉 "2" in most locales
-print(count.formatCompact()); // 👉 "2"
+print(count.to(10, 0.5)); // Outputs: 6.0
+print(count.plural("apple", "apples")); // Outputs: "apples"
+print(count.format()); // Outputs "2" in most locales
+print(count.formatCompact()); // Outputs "2"
 ```
 
-### ✍ TString Example:
+### TString Example:
 
 ```dart
 String text = "Hello World";
-print(text.roadkill); // 👉 "hello_world"
-print(text.upperRoadkill); // 👉 "HELLO_WORLD"
-print(text.camelCase); // 👉 "helloWorld"
-print(text.reversed); // 👉 "dlroW olleH"
-print(text.capitalizeWords()); // 👉 "Hello World"
+print(text.roadkill); // Outputs: "hello_world"
+print(text.upperRoadkill); // Outputs: "HELLO_WORLD"
+print(text.camelCase); // Outputs: "helloWorld"
+print(text.reversed); // Outputs: "dlroW olleH"
+print(text.capitalizeWords()); // Outputs: "Hello World"
 ```
 
-### 🔢 TDouble Example:
+### TDouble Example:
 
 ```dart
 double value = 0.123;
-print(value.percent(2)); // 👉 "12.30%"
-print(value.format()); // 👉 Locale-dependent, e.g., "0.123"
-print(value.formatCompact()); // 👉 e.g., "123"
-print(value.to(1.0, 0.5)); // 👉 0.5615
+print(value.percent(2)); // Outputs: "12.30%"
+print(value.format()); // Locale-dependent output, e.g., "0.123"
+print(value.formatCompact()); // Outputs e.g., "123"
+print(value.to(1.0, 0.5)); // Outputs 0.5615
 ```
 
-### ⌛ TFuture Example:
+### TFuture Example:
 
 ```dart
 Future<int> futureValue = Future.value(5);
-futureValue.thenRun((value) => print("Value: $value")); 
-// After future completes, 👉 "Value: 5"
+futureValue.thenRun((value) => print("Value: $value"));
+// After future completes, outputs: "Value: 5"
 ```
 
-### 🗺️ TMap Example:
+### TMap Example:
 
 ```dart
 Map<String, int> map1 = {'a': 1, 'b': 2};
 Map<String, int> map2 = {'c': 3};
 Map<String, int> combined = map1 + map2;
-print(combined); // 👉 {'a': 1, 'b': 2, 'c': 3}
+print(combined); // Outputs: {'a': 1, 'b': 2, 'c': 3}
 Map<String, int> reduced = combined - 'b';
-print(reduced); // 👉 {'a': 1, 'c': 3}
+print(reduced); // Outputs: {'a': 1, 'c': 3}
 ```
 
-### 📊 TIterableInt Example:
+### TIterableInt Example:
 
 ```dart
 Iterable<int> numbers = [1, 2, 3, 4];
-print(numbers * 2); // 👉 [2, 4, 6, 8]
-print(numbers.sum()); // 👉 10
-print(numbers.average()); // 👉 2.5
+print(numbers * 2); // Outputs: [2, 4, 6, 8]
+print(numbers.sum()); // Outputs: 10
+print(numbers.average()); // Outputs: 2.5
 ```
 
-### 🔟 TIterableDouble Example:
+### TIterableDouble Example:
 
 ```dart
 Iterable<double> doubles = [1.5, 2.5, 3.5];
-print(doubles + 1); // 👉 [2.5, 3.5, 4.5]
-print(doubles.sum()); // 👉 7.5
-print(doubles.average()); // 👉 2.5
+print(doubles + 1); // Outputs: [2.5, 3.5, 4.5]
+print(doubles.sum()); // Outputs: 7.5
+print(doubles.average()); // Outputs: 2.5
 ```
 
-### 📃 TList Example:
+### TList Example:
 
 ```dart
 List<int> list = [1, 2, 3];
 List<int> extended = list + 4;
-print(extended); // 👉 [1, 2, 3, 4]
+print(extended); // Outputs: [1, 2, 3, 4]
 List<int> reduced = extended - 2;
-print(reduced); // 👉 [1, 3, 4]
+print(reduced); // Outputs: [1, 3, 4]
 ```
 
-### ✅ TSet Example:
+### TSet Example:
 
 ```dart
 Set<int> set = {1, 2, 3};
 Set<int> extended = set + 4;
-print(extended); // 👉 {1, 2, 3, 4}
+print(extended); // Outputs: {1, 2, 3, 4}
 Set<int> reduced = extended - 2;
-print(reduced); // 👉 {1, 3, 4}
+print(reduced); // Outputs: {1, 3, 4}
 ```
 
-### 🔄 TIterable Example:
+### TIterable Example:
 
 ```dart
 Iterable<int> numbers = [1, 2, 2, 3];
 Iterable<int> uniqueNumbers = numbers.deduplicated();
-print(uniqueNumbers.toList()); // 👉 [1, 2, 3]
+print(uniqueNumbers.toList()); // Outputs: [1, 2, 3]
 Iterable<int> shuffledNumbers = numbers.shuffled();
 print(shuffledNumbers.toList()); // Random order each time
 Map<int, int> occurrences = numbers.occurrences();
-print(occurrences); // 👉 {1: 1, 2: 2, 3: 1}
+print(occurrences); // Outputs: {1: 1, 2: 2, 3: 1}
 ```
-
-Elevate your Dart applications to the next level with TOXIC's extensions—write less code while boosting readability and maintainability.
+___
+By integrating TOXIC's extensions into your Dart applications, you can achieve more with less code and enhance readability and maintainability.
