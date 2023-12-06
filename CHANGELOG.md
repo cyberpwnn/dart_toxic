@@ -1,3 +1,8 @@
+## 1.0.4
+
+* Documentation
+* Updated SDK Constraint to '>=2.19.2 <4.0.0'
+
 ## 1.0.3
 
 * Less dumb
