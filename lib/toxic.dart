@@ -2,7 +2,41 @@ library toxic;
 
 import 'dart:math';
 
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
+
+final NumberFormat _f = NumberFormat("#,##0");
+
+extension FileFormatter on num {
+  String readableFileSize({bool base1024 = true}) {
+    final base = base1024 ? 1024 : 1000;
+    if (this <= 0) return "0";
+    final units = ["B", "KB", "MB", "GB", "TB", "PB"];
+    int digitGroups = 0;
+
+    if (this > base) {
+      digitGroups = 1;
+    }
+
+    if (this > pow(base, 2)) {
+      digitGroups = 2;
+    }
+
+    if (this > pow(base, 3)) {
+      digitGroups = 3;
+    }
+
+    if (this > pow(base, 4)) {
+      digitGroups = 4;
+    }
+
+    if (this > pow(base, 5)) {
+      digitGroups = 5;
+    }
+
+    return "${_f.format(this / pow(base, digitGroups))} ${units[digitGroups]}";
+  }
+}
 
 extension TDouble on double {
   String percent([int decimals = 0]) =>
@@ -77,6 +111,11 @@ extension TString on String {
   String capitalizeWords() => split(" ").map((e) => e.capitalize()).join(" ");
 }
 
+extension XDateTime on DateTime {
+  bool isSameDayAs(DateTime dt) =>
+      year == dt.year && month == dt.month && day == dt.day;
+}
+
 extension TFuture<T> on Future<T> {
   Future<T> thenRun(void Function(T value) action) {
     return then((value) {
@@ -84,6 +123,14 @@ extension TFuture<T> on Future<T> {
       return value;
     });
   }
+
+  FutureBuilder<Widget> build(Widget Function(T) builder, {Widget? loading}) =>
+      FutureBuilder<Widget>(
+        future: then(builder),
+        builder: (context, snap) => snap.hasData
+            ? snap.data!
+            : loading ?? const SizedBox(width: 0, height: 0),
+      );
 }
 
 extension TMap<K, V> on Map<K, V> {
@@ -199,7 +246,11 @@ extension TIterableInt on Iterable<int> {
 
   Iterable<int> operator -() => map((e) => -e);
 
-  int sum() => fold(0, (previousValue, element) => previousValue + element);
+  int sum() => isEmpty
+      ? 0
+      : length == 1
+          ? first
+          : fold(0, (previousValue, element) => previousValue + element);
 
   int product() => fold(1, (previousValue, element) => previousValue * element);
 
@@ -244,7 +295,11 @@ extension TIterableDouble on Iterable<double> {
 
   Iterable<double> operator -() => map((e) => -e);
 
-  double sum() => fold(0, (previousValue, element) => previousValue + element);
+  double sum() => isEmpty
+      ? 0
+      : length == 1
+          ? first
+          : fold(0, (previousValue, element) => previousValue + element);
 
   double product() =>
       fold(1, (previousValue, element) => previousValue * element);
@@ -376,6 +431,22 @@ extension TIterable<T> on Iterable<T> {
     for (T e in list) {
       yield e;
     }
+  }
+
+  Map<M, List<T>> groupBy<M>(M Function(T) grouper) {
+    Map<M, List<T>> map = {};
+
+    for (final T k in this) {
+      M t = grouper(k);
+
+      if (!map.containsKey(t)) {
+        map[t] = [];
+      }
+
+      map[t]!.add(k);
+    }
+
+    return map;
   }
 
   /// Returns the last index of the iterable.

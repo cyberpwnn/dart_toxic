@@ -1,3 +1,8 @@
+## 1.0.5
+
+* More Extensions
+* Add flutter extensions (flutter dep)
+
 ## 1.0.4
 
 * Documentation
