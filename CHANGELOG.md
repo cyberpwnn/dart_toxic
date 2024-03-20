@@ -1,3 +1,7 @@
+## 1.0.6
+
+* Stream Extensions
+
 ## 1.0.5
 
 * More Extensions

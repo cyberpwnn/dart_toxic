@@ -116,6 +116,16 @@ extension XDateTime on DateTime {
       year == dt.year && month == dt.month && day == dt.day;
 }
 
+extension XStream<T> on Stream<T> {
+  StreamBuilder<T> build(Widget Function(T) builder, {Widget? loading}) =>
+      StreamBuilder<T>(
+        stream: this,
+        builder: (context, snap) => snap.hasData
+            ? builder(snap.data!)
+            : loading ?? const SizedBox.shrink(),
+      );
+}
+
 extension TFuture<T> on Future<T> {
   Future<T> thenRun(void Function(T value) action) {
     return then((value) {
@@ -127,9 +137,8 @@ extension TFuture<T> on Future<T> {
   FutureBuilder<Widget> build(Widget Function(T) builder, {Widget? loading}) =>
       FutureBuilder<Widget>(
         future: then(builder),
-        builder: (context, snap) => snap.hasData
-            ? snap.data!
-            : loading ?? const SizedBox(width: 0, height: 0),
+        builder: (context, snap) =>
+            snap.hasData ? snap.data! : loading ?? const SizedBox.shrink(),
       );
 }
 

@@ -1,6 +1,6 @@
 name: toxic
 description: Toxic density
-version: 1.0.5
+version: 1.0.6
 homepage: https://github.com/ArcaneArts/toxic
 environment:
   sdk: '>=2.19.2 <4.0.0'
@@ -9,5 +9,5 @@ dependencies:
     sdk: flutter
   intl: any
 dev_dependencies:
-  test: ^1.25.0
+  test: ^1.25.2
 flutter:
