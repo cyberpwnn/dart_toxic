@@ -1,3 +1,9 @@
+## 1.1.0
+
+* More extensions
+* Oil
+* Signal Builders
+
 ## 1.0.6
 
 * Stream Extensions
