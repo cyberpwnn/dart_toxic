@@ -1,3 +1,8 @@
+## 1.1.1
+
+* Iterable additions
+* SDK to 3.0.0
+
 ## 1.1.0
 
 * More extensions

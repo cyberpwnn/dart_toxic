@@ -68,6 +68,9 @@ ___
 `TList` enhances the list type with element manipulation operators:
 
 - Overloaded operators: Element addition (`+`) and removal (`-`).
+- `["a", "c", "d"].toBack("a")` moves the element to the back of the list.
+- `["a", "c", "d"].toFront("a")` moves the element to the front of the list.
+- `List.shuffle([Random])`, `List.popRandom([Random])`, and `List.randomIndex([Random])` provide randomization capabilities.
 
 ### TSet
 
@@ -79,6 +82,7 @@ ___
 
 `TIterable` adds utility and transformation methods to iterables:
 
+- `T? = Iterable<T>.select((e) => bool)` same as `T? = Iterable<T>.where((e) => bool).firstOrNull`.
 - Addition methods: Add single or multiple elements at either start or end of the iterable.
 - Statistical and utility functions: Count occurrences, deduplicate, shuffle.
 - Accessors: Retrieve last index, middle index, middle value.

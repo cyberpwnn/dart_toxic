@@ -639,6 +639,62 @@ extension TIterableDouble on Iterable<double> {
 }
 
 extension TList<T> on List<T> {
+  List<T> shuffle([Random? random]) {
+    random ??= Random();
+    List<T> list = [];
+
+    while (isNotEmpty) {
+      list.add(popRandom(random));
+    }
+
+    return list;
+  }
+
+  int randomIndex([Random? random]) {
+    random ??= Random();
+    return random.nextInt(length);
+  }
+
+  T popRandom([Random? random]) => removeAt(randomIndex(random));
+
+  List<T> toBack(T element) {
+    if (remove(element)) {
+      add(element);
+    }
+
+    return this;
+  }
+
+  List<T> toFront(T element) {
+    if (remove(element)) {
+      insert(0, element);
+    }
+
+    return this;
+  }
+
+  List<T> toBackWhere(bool Function(T) test) {
+    int at = indexWhere(test);
+
+    if (at != -1) {
+      T element = removeAt(at);
+      add(element);
+    }
+
+    return this;
+  }
+
+  List<T> toFrontWhere(bool Function(T) test) {
+    int at = indexWhere(test);
+
+    if (at != -1) {
+      T element = removeAt(at);
+      insert(0, element);
+    }
+
+    return this;
+  }
+
   List<T> operator +(T element) {
     List<T> list = toList();
     list.add(element);
@@ -668,6 +724,14 @@ extension TSet<T> on Set<T> {
 
 extension TIterable<T> on Iterable<T> {
   T? get firstOr => isEmpty ? null : first;
+
+  Iterable<T> get unique => toSet();
+
+  T? select(bool Function(T) test) => where(test).firstOrNull;
+
+  T? selectLast(bool Function(T) test) => where(test).lastOrNull;
+
+  Iterable<T> get notNull => where((element) => element != null);
 
   Iterable<T> add(T element) sync* {
     yield* this;
