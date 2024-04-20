@@ -1,14 +1,8 @@
 import 'package:flutter/widgets.dart';
-import 'package:toxic/util/multiplexer.dart';
-
-extension XStreamList on List<Stream<dynamic>> {
-  List<Stream<dynamic>> and(Stream<dynamic> other) => [...this, other];
-
-  Multiplexer<O> merge<O>(O Function(List<dynamic> buffer) mapper) =>
-      Multiplexer(this, mapper);
-}
 
 extension XStream<T> on Stream<T> {
+  Stream<T> get unique => distinct();
+
   StreamBuilder<T> build(Widget Function(T) builder, {Widget? loading}) =>
       StreamBuilder<T>(
         stream: this,

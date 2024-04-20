@@ -5,11 +5,18 @@ extension TIterable<T> on Iterable<T> {
 
   Iterable<T> get unique => toSet();
 
+  List<T> get list => this is List<T> ? this as List<T> : toList();
+
+  Set<T> get set => this is Set<T> ? this as Set<T> : toSet();
+
   T? select(bool Function(T) test) => where(test).firstOrNull;
 
   T? selectLast(bool Function(T) test) => where(test).lastOrNull;
 
   Iterable<T> get notNull => where((element) => element != null);
+
+  Iterable<T> diff(Iterable<T> other) =>
+      where((element) => !other.contains(element));
 
   Iterable<T> add(T element) sync* {
     yield* this;

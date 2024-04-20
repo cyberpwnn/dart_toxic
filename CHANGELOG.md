@@ -1,3 +1,7 @@
+## 1.2.1
+* Additions to streams and widget iterables
+* Future additions
+
 ## 1.2.0
 
 * Cleaned up the project a bit
