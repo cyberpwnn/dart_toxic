@@ -9,5 +9,4 @@ dependencies:
     sdk: flutter
   intl: any
   rxdart: any
-  provider: any
 flutter:

@@ -1,3 +1,9 @@
+## 1.2.0
+
+* Cleaned up the project a bit
+* **BREAKING** renamed `signal(msg)` to `pushSignal(msg)`
+* **BREAKING** renamed `provideN(T)` methods for providers
+
 ## 1.1.1
 
 * Iterable additions
