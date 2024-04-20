@@ -31,6 +31,46 @@ extension TIterable<T> on Iterable<T> {
     yield* this;
   }
 
+  Iterable<List<T>> chunked(int chunkSize) sync* {
+    List<T> chunk = [];
+    for (T e in this) {
+      chunk.add(e);
+      if (chunk.length >= chunkSize) {
+        yield chunk;
+        chunk = [];
+      }
+    }
+
+    if (chunk.isNotEmpty) {
+      yield chunk;
+    }
+  }
+
+  Iterable<T> whereIndex(bool Function(T value, int index) test) sync* {
+    int i = 0;
+    for (T e in this) {
+      if (test(e, i++)) {
+        yield e;
+      }
+    }
+  }
+
+  Iterable<V> mapIndexed<V>(V Function(T value, int index) f) sync* {
+    int i = 0;
+    for (T e in this) {
+      yield f(e, i++);
+    }
+  }
+
+  Iterable<T> skip(int n) sync* {
+    int i = 0;
+    for (T e in this) {
+      if (i++ >= n) {
+        yield e;
+      }
+    }
+  }
+
   T? get mostCommon =>
       occurrences().sortedKeysByValue((a, b) => b.compareTo(a)).firstOrNull;
 

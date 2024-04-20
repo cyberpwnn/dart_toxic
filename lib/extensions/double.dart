@@ -21,5 +21,5 @@ extension TDouble on double {
   String get formatCompact => NumberFormat.compact().format(this);
 
   /// Lerp this, to the given value, by the given progress.
-  double to(double to, double progress) => this + (to - this) * progress;
+  double lerpTo(double to, double progress) => this + (to - this) * progress;
 }

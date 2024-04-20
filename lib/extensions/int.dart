@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
 
 extension TInt on int {
-  double to(num to, double progress) => this + (to - this) * progress;
+  double lerpTo(num to, double progress) => this + (to - this) * progress;
 
   String plural(String singular, [String? plural]) =>
       this == 1 ? singular : plural ?? (singular + "s");

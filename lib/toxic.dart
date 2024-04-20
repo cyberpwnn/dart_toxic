@@ -27,3 +27,5 @@ export 'package:toxic/extensions/string.dart';
 export 'package:toxic/extensions/widget.dart';
 export 'package:toxic/util/oil.dart';
 export 'package:toxic/util/signal.dart';
+export 'package:toxic/util/golden.dart';
+export 'package:toxic/util/multiplexer.dart';

@@ -1,5 +1,12 @@
-
 import 'package:flutter/widgets.dart';
+import 'package:toxic/util/multiplexer.dart';
+
+extension XStreamList on List<Stream<dynamic>> {
+  List<Stream<dynamic>> and(Stream<dynamic> other) => [...this, other];
+
+  Multiplexer<O> merge<O>(O Function(List<dynamic> buffer) mapper) =>
+      Multiplexer(this, mapper);
+}
 
 extension XStream<T> on Stream<T> {
   StreamBuilder<T> build(Widget Function(T) builder, {Widget? loading}) =>
@@ -9,4 +16,54 @@ extension XStream<T> on Stream<T> {
             ? builder(snap.data!)
             : loading ?? const SizedBox.shrink(),
       );
+
+  List<Stream<dynamic>> and(Stream<dynamic> other) => [this, other];
+
+  Future<T?> get firstOrNull => isEmpty.then((value) => value ? null : first);
+
+  Future<T?> get lastOrNull => isEmpty.then((value) => value ? null : last);
+
+  Future<T?> select(bool Function(T) test) => where(test).firstOrNull;
+
+  Future<T?> selectLast(bool Function(T) test) => where(test).lastOrNull;
+
+  Stream<List<T>> chunked(int chunkSize) async* {
+    List<T> chunk = [];
+    await for (T e in this) {
+      chunk.add(e);
+      if (chunk.length >= chunkSize) {
+        yield chunk;
+        chunk = [];
+      }
+    }
+
+    if (chunk.isNotEmpty) {
+      yield chunk;
+    }
+  }
+
+  Stream<T> whereIndex(bool Function(T value, int index) test) async* {
+    int i = 0;
+    await for (T e in this) {
+      if (test(e, i++)) {
+        yield e;
+      }
+    }
+  }
+
+  Stream<V> mapIndexed<V>(V Function(T value, int index) f) async* {
+    int i = 0;
+    await for (T e in this) {
+      yield f(e, i++);
+    }
+  }
+
+  Stream<T> skip(int n) async* {
+    int i = 0;
+    await for (T e in this) {
+      if (i++ >= n) {
+        yield e;
+      }
+    }
+  }
 }

@@ -1,8 +1,13 @@
 ## 1.2.0
 
 * Cleaned up the project a bit
+* Golden power streams
+* Stream multiplexers
+* Iterable indexed mapping
+* Added a lot of iterable operations to streams
 * **BREAKING** renamed `signal(msg)` to `pushSignal(msg)`
 * **BREAKING** renamed `provideN(T)` methods for providers
+* **BREAKING** renamed `.to` to `.lerpTo` methods for ints and doubles
 
 ## 1.1.1
 
