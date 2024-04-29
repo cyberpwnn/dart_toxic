@@ -1,3 +1,9 @@
+## 1.2.3
+* Sliver Grid tools fixed
+
+## 1.2.2
+* Sliver Grid tools
+
 ## 1.2.1
 * Additions to streams and widget iterables
 * Future additions
