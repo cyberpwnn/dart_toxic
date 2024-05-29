@@ -11,6 +11,9 @@ extension XStream<T> on Stream<T> {
             : loading ?? const SizedBox.shrink(),
       );
 
+  StreamBuilder<T?> buildNullable(Widget Function(T?) builder) =>
+      build(builder, loading: builder(null));
+
   List<Stream<dynamic>> and(Stream<dynamic> other) => [this, other];
 
   Future<T?> get firstOrNull => isEmpty.then((value) => value ? null : first);

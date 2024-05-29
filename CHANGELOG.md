@@ -1,3 +1,7 @@
+## 1.2.4
+* Nullable builders for streams and futures
+
+
 ## 1.2.3
 * Sliver Grid tools fixed
 
