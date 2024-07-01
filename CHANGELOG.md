@@ -1,6 +1,8 @@
+## 1.3.0
+* Removed direct flutter dependency and created [toxic_flutter](https://pub.dev/packages/toxic_flutter) which now includes all of those features removed from toxic
+
 ## 1.2.4
 * Nullable builders for streams and futures
-
 
 ## 1.2.3
 * Sliver Grid tools fixed
