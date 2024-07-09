@@ -1,3 +1,8 @@
+extension XNStream<T> on Stream<T?> {
+  Stream<T> get bang => map((value) => value!);
+  Stream<T> or(T fallback) => map((value) => value ?? fallback);
+}
+
 extension XStream<T> on Stream<T> {
   Stream<T> get unique => distinct();
 

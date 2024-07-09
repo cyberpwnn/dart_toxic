@@ -8,3 +8,8 @@ extension TFuture<T> on Future<T> {
     });
   }
 }
+
+extension TNFuture<T> on Future<T?> {
+  Future<T> get bang => then((value) => value!);
+  Future<T> or(T fallback) => then((value) => value ?? fallback);
+}
