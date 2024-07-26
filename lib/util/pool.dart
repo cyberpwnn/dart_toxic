@@ -19,12 +19,14 @@ class Pool<T extends Pooled> {
   final T Function() factory;
   final int minAvailable;
   final double growthFactor;
+  final double shrinkFactor;
   final bool batchedGrowth;
 
   Pool({
     required this.factory,
     this.minAvailable = 1,
     this.growthFactor = 0.15,
+    this.shrinkFactor = 0.33,
     this.batchedGrowth = true,
   })  : _available = new HashSet.identity(),
         _inUse = new HashSet.identity();
@@ -40,11 +42,19 @@ class Pool<T extends Pooled> {
       return;
     }
 
+    int a = 0;
+
     final targetSize = max(inUseCount * growthFactor, minAvailable);
+    final targetMaxSize = shrinkFactor * targetSize;
     while (availableCount < targetSize) {
       _available.add(factory()
         .._pool = this
         ..onReset());
+      a++;
+    }
+
+    if (availableCount > targetMaxSize) {
+      _available.remove(_available.first);
     }
   }
 
