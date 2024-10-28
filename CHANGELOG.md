@@ -1,3 +1,6 @@
+## 1.3.2
+* Fix String.capitalize extension failing on empty or single char strings
+
 ## 1.3.1
 * Bang!
 

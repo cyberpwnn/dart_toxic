@@ -1,5 +1,3 @@
-
-
 import 'dart:math';
 
 import 'package:toxic/toxic.dart';
@@ -26,8 +24,8 @@ extension TString on String {
   String randomCase() => charMap((e) => e == " "
       ? " "
       : _r.nextBool()
-      ? e.toUpperCase()
-      : e.toLowerCase());
+          ? e.toUpperCase()
+          : e.toLowerCase());
 
   String charMap(String Function(String char) map) {
     String s = "";
@@ -54,7 +52,11 @@ extension TString on String {
 
   String splitLast(String separator) => split(separator).last;
 
-  String capitalize() => "${this[0].toUpperCase()}${substring(1)}";
+  String capitalize() => isEmpty
+      ? ""
+      : length == 1
+          ? this[0].toUpperCase()
+          : "${this[0].toUpperCase()}${substring(1)}";
 
   String capitalizeWords() => split(" ").map((e) => e.capitalize()).join(" ");
 }
