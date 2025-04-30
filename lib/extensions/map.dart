@@ -107,4 +107,7 @@ extension TMap<K, V> on Map<K, V> {
     map.addAll(other);
     return map;
   }
+
+  Map<K, V> where(bool Function(K key, V value) test) =>
+      Map.fromEntries(entries.where((entry) => test(entry.key, entry.value)));
 }

@@ -1,3 +1,9 @@
+# 1.3.4
+* Streams and stuff and accumulators
+
+## 1.3.3
+* Added Map Map.where((k,v) => bool) extension
+
 ## 1.3.2
 * Fix String.capitalize extension failing on empty or single char strings
 
