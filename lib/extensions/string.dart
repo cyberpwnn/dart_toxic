@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:toxic/toxic.dart';
+import 'package:toxic/util/charcodec.dart';
 
 Random _r = Random();
 
@@ -20,6 +23,24 @@ extension TString on String {
 
   String get camelCase =>
       split(" ").map((e) => e.toLowerCase().capitalize()).join();
+
+  Uint8List get encodedUtf8 => utf8.encode(this);
+
+  Uint8List get decodedBase64 => base64Decode(this);
+
+  Uint8List get decodedHex {
+    Uint8List result = Uint8List(length ~/ 2);
+    for (int i = 0; i < length; i += 2) {
+      String byte = substring(i, i + 2);
+      result[i ~/ 2] = int.parse(byte, radix: 16);
+    }
+    return result;
+  }
+
+  Uint8List decodedWithCharset(String charset) =>
+      CharCodec.decodeFromBase64(encoded: this, charset: charset).decodedBase64;
+
+  Uint8List get decodedBundle => CharCodec.decodeBundle(this).decodedBase64;
 
   String randomCase() => charMap((e) => e == " "
       ? " "
