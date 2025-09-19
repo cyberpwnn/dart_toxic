@@ -12,4 +12,8 @@ extension TFuture<T> on Future<T> {
 extension TNFuture<T> on Future<T?> {
   Future<T> get bang => then((value) => value!);
   Future<T> or(T fallback) => then((value) => value ?? fallback);
+  Future<T> get showErrors => catchError((e, s) {
+        print("Error in Future: $e\n$s");
+        throw e;
+      }).bang;
 }
