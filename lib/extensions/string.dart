@@ -3,7 +3,7 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:toxic/toxic.dart';
-import 'package:toxic/util/charcodec.dart';
+import 'package:toxic/util/path_regex.dart';
 
 Random _r = Random();
 
@@ -80,4 +80,21 @@ extension TString on String {
           : "${this[0].toUpperCase()}${substring(1)}";
 
   String capitalizeWords() => split(" ").map((e) => e.capitalize()).join(" ");
+
+  String? nextPath(String key) {
+    List<String> parts = split("/");
+    int index = parts.indexOf(key);
+    if (index == -1 || index >= parts.lastIndex) {
+      return null;
+    }
+    return parts[index + 1];
+  }
+
+  Map<String, String> extractPathPattern(String pattern) {
+    List<String> parameters = [];
+    RegExp regExp = pathToRegExp(pattern, parameters: parameters);
+    Match? match = regExp.matchAsPrefix(this);
+    if (match == null) return {};
+    return rextract(parameters, match);
+  }
 }

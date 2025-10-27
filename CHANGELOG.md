@@ -1,3 +1,6 @@
+# 1.3.7
+* Path manipulation extensions
+
 # 1.3.4
 * Streams and stuff and accumulators
 

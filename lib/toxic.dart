@@ -1,5 +1,7 @@
 library toxic;
 
+import 'package:toxic/extensions/string.dart';
+
 export 'package:toxic/extensions/date_time.dart';
 export 'package:toxic/extensions/double.dart';
 export 'package:toxic/extensions/future.dart';
@@ -24,3 +26,9 @@ export 'package:toxic/util/golden.dart';
 export 'package:toxic/util/multiplexer.dart';
 export 'package:toxic/util/oil.dart';
 export 'package:toxic/util/ssss.dart';
+
+void main() {
+  Map<String, String> e = "library/abc/member/123"
+      .extractPathPattern("library/:library/member/:member");
+  print(e);
+}
