@@ -4,6 +4,9 @@ import 'dart:typed_data';
 class SSSS {
   const SSSS._();
 
+  static String compactDecoder =
+      "_d(List<Uint8List>p){var d=[<int>[],[],[],[]];o(a, b){int r=0;for(int i=0;i<8;i++){if((b&1)==1)r^=a;var h=(a&0x80)!=0;a=(a<<1)&0xFF;if(h)a^=0x1b;b>>=1;}return r;}g(a,e)=>e<1?1:e&1>0?o(g(o(a,a),e>>1),a):g(o(a,a),e>>1);for(int i=0;i<p.length;i++){d[1].add(p[i][0]);d[2].add(p[i].sublist(1));}for(int i=0;i<d[1].length;i++)d[3].add(d[1].asMap().keys.fold(1,(r,j)=>j==i?r:o(r,o(d[1][j],g(d[1][i]^d[1][j],254)))));for(int j=0;j<p[0].length-1;j++){int r=0;for(int i=0;i<d[1].length;i++){r=r^o(d[2][i][j],d[3][i]);}d[0].add(r);}return d[0];}";
+
   static Iterable<Uint8List> encodeShares(
       {required Uint8List secretBytes, int threshold = 2, int? seed}) sync* {
     if (threshold < 1 || threshold > 255) {
