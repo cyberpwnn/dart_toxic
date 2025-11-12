@@ -1,3 +1,6 @@
+# 1.3.8
+* Toxic fixes
+
 # 1.3.7
 * Path manipulation extensions
 
